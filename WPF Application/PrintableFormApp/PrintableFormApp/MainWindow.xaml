@@ -45,7 +45,6 @@
                     </DataGrid.Columns>
                 </DataGrid>
 
-                <!-- Print Button -->
                 <Button Content="Print" HorizontalAlignment="Right" Width="100" Click="PrintButton_Click"/>
             </StackPanel>
         </ScrollViewer>
