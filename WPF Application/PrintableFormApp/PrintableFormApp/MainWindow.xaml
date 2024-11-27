@@ -1,0 +1,53 @@
+﻿<Window x:Class="PrintableFormApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Gold Purity Form" Height="600" Width="800">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title Section -->
+        <TextBlock Grid.Row="0" Text="Gold Purity Report" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="10"/>
+
+        <!-- Form Content -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="20">
+                <!-- Customer Information Section -->
+                <TextBlock Text="Customer Information" FontWeight="Bold" FontSize="16" Margin="0,10"/>
+                <UniformGrid Columns="2" Margin="0,0,0,10">
+                    <TextBlock Text="Customer Name:" FontWeight="Bold"/>
+                    <TextBox x:Name="CustomerNameTextBox" Width="200" />
+
+                    <TextBlock Text="Sample Type:" FontWeight="Bold"/>
+                    <TextBox x:Name="SampleTypeTextBox" Width="200" />
+
+                    <TextBlock Text="Sample Weight:" FontWeight="Bold"/>
+                    <TextBox x:Name="SampleWeightTextBox" Width="200" />
+
+                    <TextBlock Text="Gold Purity (%):" FontWeight="Bold"/>
+                    <TextBox x:Name="GoldPurityTextBox" Width="200" />
+
+                    <TextBlock Text="Karat:" FontWeight="Bold"/>
+                    <TextBox x:Name="KaratTextBox" Width="200" />
+
+                    <TextBlock Text="Date/Time:" FontWeight="Bold"/>
+                    <TextBlock Name="DateTimeTextBlock" />
+                </UniformGrid>
+
+                <!-- Composition Table Section -->
+                <TextBlock Text="Composition Details" FontWeight="Bold" FontSize="16" Margin="0,10"/>
+                <DataGrid x:Name="CompositionDataGrid" AutoGenerateColumns="False" HeadersVisibility="Column" Margin="0,0,0,10" BorderThickness="1">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Element" Binding="{Binding Element}" IsReadOnly="True" Width="*"/>
+                        <DataGridTextColumn Header="Percentage" Binding="{Binding Percentage}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <!-- Print Button -->
+                <Button Content="Print" HorizontalAlignment="Right" Width="100" Click="PrintButton_Click"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>
