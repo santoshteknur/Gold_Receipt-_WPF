@@ -38,12 +38,19 @@
 
                 <!-- Composition Table Section -->
                 <TextBlock Text="Composition Details" FontWeight="Bold" FontSize="16" Margin="0,10"/>
-                <DataGrid x:Name="CompositionDataGrid" AutoGenerateColumns="False" HeadersVisibility="Column" Margin="0,0,0,10" BorderThickness="1">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Element" Binding="{Binding Element}" IsReadOnly="True" Width="*"/>
-                        <DataGridTextColumn Header="Percentage" Binding="{Binding Percentage}" Width="*"/>
-                    </DataGrid.Columns>
-                </DataGrid>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <DataGrid x:Name="CompositionDataGrid" 
+                          ItemsSource="{Binding CompositionList}" 
+                          AutoGenerateColumns="False" 
+                          HeadersVisibility="Column" 
+                          IsReadOnly="True" 
+                          BorderThickness="1">  
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Element" Binding="{Binding Element}" Width="*" />
+                            <DataGridTextColumn Header="Percentage" Binding="{Binding Percentage}" Width="*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </ScrollViewer>
 
                 <Button Content="Print" HorizontalAlignment="Right" Width="100" Click="PrintButton_Click"/>
             </StackPanel>

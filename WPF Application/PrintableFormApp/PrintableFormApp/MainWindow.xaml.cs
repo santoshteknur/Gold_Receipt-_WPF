@@ -16,12 +16,13 @@ namespace PrintableFormApp
             // Initialize the Composition List
             CompositionList = new ObservableCollection<ElementComposition>
             {
-                new ElementComposition { Element = "Gold", Percentage = "" },
-                new ElementComposition { Element = "Silver", Percentage = "" },
-                new ElementComposition { Element = "Copper", Percentage = "" },
-                new ElementComposition { Element = "Platinum", Percentage = "" },
-                new ElementComposition { Element = "Lead", Percentage = "" }
+                new ElementComposition { Element = "Gold", Percentage = "0.00" },
+                new ElementComposition { Element = "Silver", Percentage = "0.00" },
+                new ElementComposition { Element = "Copper", Percentage = "0.00" },
+                new ElementComposition { Element = "Platinum", Percentage = "0.00" },
+                new ElementComposition { Element = "Lead", Percentage = "0.00" }
             };
+
 
             DateTimeTextBlock.Text = CurrentDateTime;
             CompositionDataGrid.ItemsSource = CompositionList;
@@ -29,7 +30,15 @@ namespace PrintableFormApp
 
         private void PrintButton_Click(object sender, RoutedEventArgs e)
         {
-            // Create the print layout and bind data
+            if (string.IsNullOrWhiteSpace(CustomerNameTextBox.Text) ||
+                string.IsNullOrWhiteSpace(SampleTypeTextBox.Text) ||
+                string.IsNullOrWhiteSpace(SampleWeightTextBox.Text))
+            {
+                MessageBox.Show("Please fill all required fields.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            // Proceed with the printing logic
             PrintLayout printLayout = new PrintLayout();
             printLayout.DataContext = new
             {
@@ -42,7 +51,6 @@ namespace PrintableFormApp
                 CompositionList = CompositionList
             };
 
-            // Show the preview window
             PrintPreviewWindow previewWindow = new PrintPreviewWindow(printLayout);
             previewWindow.ShowDialog();
         }

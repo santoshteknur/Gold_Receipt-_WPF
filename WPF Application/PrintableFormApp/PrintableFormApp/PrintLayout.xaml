@@ -15,27 +15,47 @@
         <StackPanel Grid.Row="1">
             <!-- Customer Info -->
             <TextBlock Text="Customer Information" FontWeight="Bold" FontSize="16" Margin="0,10"/>
-            <UniformGrid Columns="2" Margin="0,0,0,10">
-                <TextBlock Text="Customer Name:" FontWeight="Bold"/>
-                <TextBlock Text="{Binding CustomerName}" />
-                <TextBlock Text="Sample Type:" FontWeight="Bold"/>
-                <TextBlock Text="{Binding SampleType}" />
-                <TextBlock Text="Sample Weight:" FontWeight="Bold"/>
-                <TextBlock Text="{Binding SampleWeight}" />
-                <TextBlock Text="Gold Purity (%):" FontWeight="Bold"/>
-                <TextBlock Text="{Binding GoldPurity}" />
-                <TextBlock Text="Karat:" FontWeight="Bold"/>
-                <TextBlock Text="{Binding Karat}" />
-                <TextBlock Text="Date/Time:" FontWeight="Bold"/>
-                <TextBlock Text="{Binding DateTime}" />
-            </UniformGrid>
+            <Grid Margin="0,0,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Customer Name:" FontWeight="Bold" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox x:Name="CustomerNameTextBox" Grid.Column="1" Width="200" Margin="5,0"/>
+
+                <TextBlock Text="Sample Type:" FontWeight="Bold" Grid.Row="1" VerticalAlignment="Center"/>
+                <TextBox x:Name="SampleTypeTextBox" Grid.Column="1" Grid.Row="1" Width="200" Margin="5,0"/>
+
+                <TextBlock Text="Sample Weight:" FontWeight="Bold" Grid.Row="2" VerticalAlignment="Center"/>
+                <TextBox x:Name="SampleWeightTextBox" Grid.Column="1" Grid.Row="2" Width="200" Margin="5,0"/>
+
+                <TextBlock Text="Gold Purity (%):" FontWeight="Bold" Grid.Row="3" VerticalAlignment="Center"/>
+                <TextBox x:Name="GoldPurityTextBox" Grid.Column="1" Grid.Row="3" Width="200" Margin="5,0"/>
+
+                <TextBlock Text="Karat:" FontWeight="Bold" Grid.Row="4" VerticalAlignment="Center"/>
+                <TextBox x:Name="KaratTextBox" Grid.Column="1" Grid.Row="4" Width="200" Margin="5,0"/>
+
+                <TextBlock Text="Date/Time:" FontWeight="Bold" Grid.Row="5" VerticalAlignment="Center"/>
+                <TextBlock Name="DateTimeTextBlock" Grid.Column="1" Grid.Row="5" Margin="5,0"/>
+            </Grid>
 
             <!-- Composition Table -->
             <TextBlock Text="Composition Details" FontWeight="Bold" FontSize="16" Margin="0,10"/>
             <DataGrid ItemsSource="{Binding CompositionList}" AutoGenerateColumns="False" HeadersVisibility="Column" IsReadOnly="True" BorderThickness="1">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Element" Binding="{Binding Element}" Width="*"/>
-                    <DataGridTextColumn Header="Percentage" Binding="{Binding Percentage}" Width="*"/>
+                    <DataGridTextColumn Header="Percentage" Binding="{Binding Percentage}" Width="*">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Percentage}" Value="0.00">
+                                        <Setter Property="Foreground" Value="Red"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
